@@ -81,10 +81,6 @@ const NewUpload = () => {
      */
     const handleGenerate = async () => {
         if (original_Image_1 && original_Image_2) {
-            const postFormData = new FormData();
-            postFormData.append("image_1", original_Image_1);
-            postFormData.append("image_2", original_Image_2);
-
             const image_1_formData = new FormData();
             image_1_formData.append('src_img', original_Image_1)
             const image_2_formData = new FormData();
@@ -109,7 +105,10 @@ const NewUpload = () => {
 
             if (src_res_1 != null && src_res_2 != null) {
                 console.log(src_res_1, src_res_2)
-                axios.get(`https://thinkdiff.us/getdata/swap/2/image?device_them_su_kien=${userData.device_register}&ip_them_su_kien=${userData.ip_register}&id_user=${userData.id_user}`, {
+
+                // const url = `https://thinkdiff.us/getdata/?device_them_su_kien=${userData.device_register}&ip_them_su_kien=${userData.ip_register}&id_user=${userData.id_user}&ten_nam=long&ten_nu=ngoc`
+                const url = `https://thinkdiff.us/getdata/swap/2/image?device_them_su_kien=${userData.device_register}&ip_them_su_kien=${userData.ip_register}&id_user=${userData.id_user}`
+                axios.get(url, {
                     headers: {
                         'link1': src_res_1.data,
                         'link2': src_res_2.data,
